@@ -7,8 +7,7 @@ var expect    = require('chai').expect,
     Treasure  = require('../../app/models/treasure'),
     dbConnect = require('../../app/lib/mongodb'),
     cp        = require('child_process'),
-    db        = 'treasure-test',
-    Mongo     = require('mongodb');
+    db        = 'treasure-test';
 
 describe('Treasure', function(){
   before(function(done){
@@ -25,7 +24,7 @@ describe('Treasure', function(){
 
   describe('constructor', function(){
     it('should create a new Treasure object', function(){
-      var o = {name: 'rubies', loc:{name: 'Nashville', lat: '32.1', lng: '-9.6'}, difficulty: 2, order: 1, hints:{1:'find rubies', 2:'celebrate'}, tags:'tn, jewels'},
+      var o = {name: ['rubies'], loc:['Nashville', '32.1', '-9.6'], difficulty: ['2'], order:['1'], hints:['find rubies','celebrate'], tags:['tn, jewels']},
           t = new Treasure(o);
       expect(t).to.be.instanceof(Treasure);
       expect(t.name).to.equal('rubies');
@@ -60,22 +59,6 @@ describe('Treasure', function(){
     });
   });
 
-  /* describe('.create', function(){
-    it('should create a treasure', function(done){
-      var o = {name: 'rubies', loc:{name: 'Nashville', lat: '32.1', lng: '-9.6'}, difficulty: 2, order: 1, photos: ['nash.jpg'], hints: ['find rubies'], tags: ['tn', 'jewels']};
-      Treasure.create(o, function(err, treasure){
-        expect(treasure._id).to.be.instanceof(Mongo.ObjectID);
-        expect(treasure.name).to.equal('rubies');
-        expect(treasure.loc).to.be.instanceof(Object);
-        expect(treasure.difficulty).to.equal(2);
-        expect(treasure.order).to.equal(1);
-        expect(treasure.photos).to.have.length(1);
-        expect(treasure.hints).to.have.length(1);
-        expect(treasure.tags).to.have.length(2);
-        done();
-      });
-    });
-  });*/
 
   describe('.query', function(){
     it('should get all treasures', function(done){
