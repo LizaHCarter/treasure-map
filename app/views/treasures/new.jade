@@ -1,0 +1,40 @@
+extends ../shared/template
+block content
+  h2 Add Treasure
+  .panel.panel-default
+    .panel-body
+      .row
+        form(role ='form', method='post', action='/treasures')
+          .col-xs-6
+            .form-group
+              label(for='name') Treasure Name
+              input.form-control#name(type='text', name='name', autofocus = true)
+            .form-group
+              label(for='loc') Location 
+              input.form-control#locName(type='text', name='loc')
+              input.form-control#locLat(type='hidden', name='loc')
+              input.form-control#locLng(type='hidden', name='loc')
+            .form-group
+              label(for='difficulty') Difficulty
+              select#difficulty(name='difficulty')
+                option(value=1) Easy
+                option(value=2) Medium
+                option(value=3) Hard
+            .form-group#hints
+              label(for='hints') Hints
+              input.form-control#hints(type='text', placeholder='Hints',name='hints')
+            .form-group#hintButton
+              div.btn.btn-primary#addHint(type='button') Add Hint
+        .col-xs-6
+          .form-group
+            label(for='photos') Upload Photo
+            input.form-control#photos(type='file', name='photos', multiple=true)
+          .form-group
+            label(for='tags') Tags
+            input.form-control#tags(type='text', name='tags', placeholder='tag1, tag2, tag3...')
+          .form-group
+            label(for='order') Order
+            input.form-control#order(type='number', name='order')
+          button.btn.btn-primary.btn-lg(type='submit') Submit
+block scripts
+  script(src='/js/user/new.js')
