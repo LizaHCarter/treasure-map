@@ -4,12 +4,13 @@
 'use strict';
 
 var expect    = require('chai').expect,
-    Person    = require('../../app/models/person'),
+    Treasure  = require('../../app/models/treasure'),
     dbConnect = require('../../app/lib/mongodb'),
     cp        = require('child_process'),
-    db        = 'template-test';
+    db        = 'treasure-test',
+    Mongo     = require('mongodb');
 
-describe('Person', function(){
+describe('Treasure', function(){
   before(function(done){
     dbConnect(db, function(){
       done();
@@ -23,16 +24,63 @@ describe('Person', function(){
   });
 
   describe('constructor', function(){
-    it('should create a new Person object', function(){
-      var p = new Person();
-      expect(p).to.be.instanceof(Person);
+    it('should create a new Treasure object', function(){
+      var o = {name: 'rubies', loc:{name: 'Nashville', lat: '32.1', lng: '-9.6'}, difficulty: 2, order: 1, hints:{1:'find rubies', 2:'celebrate'}, tags:'tn, jewels'},
+          t = new Treasure(o);
+      expect(t).to.be.instanceof(Treasure);
+      expect(t.name).to.equal('rubies');
+      expect(t.loc).to.be.instanceof(Object);
+      expect(t.difficulty).to.equal(2);
+      expect(t.order).to.equal(1);
+      expect(t.hints).to.have.length(2);
+      expect(t.photos).to.have.length(0);
+      expect(t.tags).to.have.length(2);
+      expect(t.isFound).to.be.false;
     });
   });
 
-  describe('.all', function(){
-    it('should get all people', function(done){
-      Person.all(function(err, people){
-        expect(people).to.have.length(2);
+  describe('.findById', function(){
+    it('should find a treasure by its id', function(done){
+      Treasure.findById('000000000000000000000001', function(treasure){
+        expect(treasure.name).to.equal('diamonds');
+        done();
+      });
+    });
+  });
+
+  describe('.found', function(){
+    it('should save isFound as true in the database', function(done){
+      var id = '000000000000000000000001';
+      Treasure.found(id, function(){
+        Treasure.findById(id, function(treasure){
+          expect(treasure.isFound).to.be.true;
+          done();
+        });
+      });
+    });
+  });
+
+  /* describe('.create', function(){
+    it('should create a treasure', function(done){
+      var o = {name: 'rubies', loc:{name: 'Nashville', lat: '32.1', lng: '-9.6'}, difficulty: 2, order: 1, photos: ['nash.jpg'], hints: ['find rubies'], tags: ['tn', 'jewels']};
+      Treasure.create(o, function(err, treasure){
+        expect(treasure._id).to.be.instanceof(Mongo.ObjectID);
+        expect(treasure.name).to.equal('rubies');
+        expect(treasure.loc).to.be.instanceof(Object);
+        expect(treasure.difficulty).to.equal(2);
+        expect(treasure.order).to.equal(1);
+        expect(treasure.photos).to.have.length(1);
+        expect(treasure.hints).to.have.length(1);
+        expect(treasure.tags).to.have.length(2);
+        done();
+      });
+    });
+  });*/
+
+  describe('.query', function(){
+    it('should get all treasures', function(done){
+      Treasure.query({},{},function(err, treasure){
+        expect(treasure).to.have.length(3);
         done();
       });
     });

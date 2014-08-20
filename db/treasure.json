@@ -1,0 +1,36 @@
+{
+  "_id":{"$oid":"000000000000000000000001"},
+  "name":"diamonds",
+  "loc":{"lat": "36.16666700", "lng":"-86.78333300", "name":"Nashville, TN"},
+  "difficulty": 1,
+  "order": 1,
+  "photos":["http://www.devilsdungeon.net/wp-content/uploads/2012/08/night_skyline.jpeg"],
+  "hints":["leave NSS", "take interstate downtown", "find diamonds"],
+  "tags": ["america", "jewels"],
+  "isFound":false
+}
+
+{
+  "_id":{"$oid":"000000000000000000000002"},
+  "name":"gold",
+  "loc":{"lat": "30.45828290", "lng":"-91.14031960", "name":"Baton Rouge, LA"},
+  "difficulty": 2,
+  "order": 2,
+  "photos":["http://www.gbria.org/images/Baton-Rouge-Aerial.png"],
+  "hints":["fly out of Nashville", "fly into Baton Rouge", "find gold"],
+  "tags": ["america", "gold"],
+  "isFound":false
+}
+
+{
+  "_id":{"$oid":"000000000000000000000003"},
+  "name":"pearls",
+  "loc":{"lat": "-8.40951780", "lng":"115.18891600", "name":"Bali, Indonesia"},
+  "difficulty": 3,
+  "order": 3,
+  "photos":["http://nexttriptourism.com/wp-content/uploads/2013/10/Bali-Island-Resort.jpg"],
+  "hints":["leave Baton Rouge", "fly to Indonesia", "find pearls"],
+  "tags": ["asia", "jewels"],
+  "isFound":false
+}
+
