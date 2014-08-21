@@ -38,5 +38,16 @@ block content
               .photo.thumbnail(style='background-image:url(#{photo});')
 
 
+      .row
+        .col-xs-12
+          #foundButton
+            if treasure.isFound === false
+              form(role='form', method='post', action='/treasures/#{treasure._id}/found')
+                unless treasure.isFound
+                  button#foundIt.btn-lg.btn-danger(type='submit') Found It!
+                else
+                  a.btn-lg.btn-warning(href='/treasures') View Treasures
+
+
 block scripts
   script(src='/js/user/show.js')

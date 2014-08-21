@@ -13,7 +13,7 @@
 
   function addMarker(lat, lng, name){
     var latLng = new google.maps.LatLng(lat, lng);
-    new google.maps.Marker({map:map, position: latLng, title: name, animation: google.maps.Animation.DROP});
+    new google.maps.Marker({map:map, position: latLng, title: name, animation: google.maps.Animation.DROP, icon:'http://icons.iconarchive.com/icons/manda-pie/nautical/24/Treasure-chest-icon.png'});
   }
   function getPosition(){
     var $treasure = $('#data'),

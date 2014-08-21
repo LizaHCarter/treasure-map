@@ -13,7 +13,7 @@ function Treasure(o){
   this.hints      = o.hints;
   this.tags       = o.tags[0].split(',').map(function(t){return t.trim();});
   this.isFound    = false;
-  this.isLinkable = (o.order[0] === '1') ? true : false;
+  this.isLinkable = this.order === 1 ? true : false;
 }
 
 Object.defineProperty(Treasure, 'collection', {
@@ -21,14 +21,12 @@ Object.defineProperty(Treasure, 'collection', {
 });
 
 Treasure.query = function(query, cb){
-  var filter = {},
-      options = {};
-  if(query.tag){filter = {tags:{$in:[query.tag]}};}
-  if(query.sortBy){
-    var sort = (query.order) ? query.order * 1 : 1;
-    options.sort = [[query.sortBy,sort]];
-  }
-  Treasure.collection.find(query, options).toArray(cb);
+  var filter = query.tag ? {tags:query.tag} : {},
+      sort   = {};
+  if(query.tags){filter = {tags:{$in:[query.tag]}};}
+  if(query.sort){sort[query.sort] = query.order * 1;}
+
+  Treasure.collection.find(filter).sort(sort).toArray(cb);
 };
 
 Treasure.count = function(cb){
@@ -65,8 +63,13 @@ Treasure.prototype.save = function(cb){
 };
 
 Treasure.found = function(id, cb){
-  var _id = Mongo.ObjectID(id);
-  Treasure.collection.update({_id:_id}, {$set:{isFound:true}}, cb);
+  id = Mongo.ObjectID(id);
+  Treasure.collection.findOne({_id:id}, function(err, t){
+    Treasure.collection.update({_id:id}, {$set:{isFound:true}}, function(){
+      var next = t.order + 1;
+      Treasure.collection.update({order:next}, {$set:{isLinkable:true}}, cb);
+    });
+  });
 };
 
 Treasure.create = function(fields, files, cb){

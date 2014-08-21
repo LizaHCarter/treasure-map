@@ -32,3 +32,23 @@ exports.sort = function(query, name, display){
       link = '<a href="/treasures?sort=' + name + '&direction=' + direction + tag + '">'+display+'</a>';
   return link;
 };
+
+exports.difficulty = function(difficulty){
+  switch(difficulty){
+    case 1:
+      return 'Easy';
+    case 2:
+      return 'Medium';
+    case 3:
+      return 'Hard';
+  }
+};
+
+exports.allowLink = function(t){
+  var s = t.name;
+  if(t.isLinkable){
+    var display = t.isFound ? 'FOUND: '+t.name : t.name;
+    s = '<a href="treasures/'+t._id+'">'+display+'</a>';
+  }
+  return s;
+}

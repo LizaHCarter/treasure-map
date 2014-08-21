@@ -23,6 +23,7 @@ module.exports = function(app, express){
   app.get('/treasures', treasures.index);
   app.post('/treasures', treasures.create);
   app.get('/treasures/:id', treasures.show);
+  app.post('/treasures/:id/found', treasures.found);
 
   console.log('Express: Routes Loaded');
 };

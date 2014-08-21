@@ -7,7 +7,8 @@
   "photos":["http://www.devilsdungeon.net/wp-content/uploads/2012/08/night_skyline.jpeg"],
   "hints":["leave NSS", "take interstate downtown", "find diamonds"],
   "tags": ["america", "jewels"],
-  "isFound":false
+  "isFound":false,
+  "isLinkable":true
 }
 
 {
@@ -19,7 +20,8 @@
   "photos":["http://www.gbria.org/images/Baton-Rouge-Aerial.png"],
   "hints":["fly out of Nashville", "fly into Baton Rouge", "find gold"],
   "tags": ["america", "gold"],
-  "isFound":false
+  "isFound":false,
+  "isLinkable":false
 }
 
 

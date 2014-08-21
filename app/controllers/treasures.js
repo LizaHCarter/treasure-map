@@ -33,3 +33,10 @@ exports.show = function(req, res){
     res.render('treasures/show', {treasure:treasure});
   });
 };
+
+exports.found = function(req, res){
+  console.log(req.params.id)
+  Treasure.found(req.params.id, function(){
+    res.redirect('/treasures');
+  });
+};
