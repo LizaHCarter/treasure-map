@@ -1,0 +1,33 @@
+extends ../shared/template
+block content
+  .panel.panel-default
+    .panel-body
+      .row
+        .col-xs-12#main
+          #map
+      .row
+        .col-xs-12
+          table.table.table-hover
+            thead
+              tr
+                th Name
+                th Location
+                th Difficulty
+                th Tags
+                th Order
+                th Found
+            tbody
+              each treasure in treasures
+                tr(data-name='#{treasure.loc.name}', data-lat='#{treasure.loc.lat}', data-lng='#{treasure.loc.lng}', data-order='#{treasure.order}')
+                  td= treasure.name
+                  td= treasure.loc.name
+                  td= treasure.difficulty
+                  td= treasure.tags
+                  td= treasure.order
+                  if treasure.isFound === false
+                    td: img(src='https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xaf1/t1.0-1/c13.4.48.48/p56x56/198106_189018051141204_1548243_n.jpg') 
+                  else
+                    td: img(src='http://profile.ak.fbcdn.net/hprofile-ak-xfp1/t1.0-1/c8.0.48.48/p48x48/1609901_1389244521341414_1211965128_n.jpg')
+
+block scripts
+  script(src='/js/user/index.js')

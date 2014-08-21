@@ -2,23 +2,26 @@
 
 (function(){
   'use strict';
-  var i = 1;
 
   $(document).ready(function(){
-    $('form').submit(addTreasure);
     $('#addHint').click(addHint);
+    $('form').submit(addTreasure);
   });
 
   function addHint(){
-    var $input = "<input type='test' class='form-control' name='hints'["+(i++)+"]'>";
-    $('#hints').append($input);
+    var $i = $('<input>');
+    $i.attr('type', 'text');
+    $i.attr('name', 'hints');
+    $i.addClass('form-control');
+    $i.addClass('inserted');
+    $('#hints').append($i);
   }
 
   function addTreasure(e){
-    var lat = $('#locLat').val();
+    var lat = $('input[data-loc=lat]').val();
 
     if(!lat){
-      var name = $('#locName').val();
+      var name = $('input[data-loc=name]').val();
       geocode(name);
       e.preventDefault();
     }
@@ -31,9 +34,9 @@
           lat  = results[0].geometry.location.lat(),
           lng  = results[0].geometry.location.lng();
 
-      $('#locName').val(name);
-      $('#locLat').val(lat);
-      $('#locLng').val(lng);
+      $('input[data-loc=name]').val(name);
+      $('input[data-loc=lat]').val(lat);
+      $('input[data-loc=lng]').val(lng);
 
       $('form').submit();
     });

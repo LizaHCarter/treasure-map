@@ -22,15 +22,4 @@
   "isFound":false
 }
 
-{
-  "_id":{"$oid":"000000000000000000000003"},
-  "name":"pearls",
-  "loc":{"lat": "-8.40951780", "lng":"115.18891600", "name":"Bali, Indonesia"},
-  "difficulty": 3,
-  "order": 3,
-  "photos":["http://nexttriptourism.com/wp-content/uploads/2013/10/Bali-Island-Resort.jpg"],
-  "hints":["leave Baton Rouge", "fly to Indonesia", "find pearls"],
-  "tags": ["asia", "jewels"],
-  "isFound":false
-}
 

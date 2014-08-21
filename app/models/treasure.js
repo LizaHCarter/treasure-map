@@ -19,8 +19,19 @@ Object.defineProperty(Treasure, 'collection', {
   get: function(){return global.mongodb.collection('treasures');}
 });
 
-Treasure.query = function(query, sort, cb){
-  Treasure.collection.find(query,sort).toArray(cb);
+Treasure.query = function(query, cb){
+  var filter = {},
+      options = {};
+  if(query.tag){filter = {tags:{$in:[query.tag]}};}
+  if(query.sortBy){
+    var sort = (query.order) ? query.order * 1 : 1;
+    options.sort = [[query.sortBy,sort]];
+  }
+  Treasure.collection.find(query, options).toArray(cb);
+};
+
+Treasure.count = function(cb){
+  Treasure.collection.count(cb);
 };
 
 Treasure.findById = function(id, cb){
@@ -30,7 +41,7 @@ Treasure.findById = function(id, cb){
   });
 };
 
-Treasure.prototype.addPhoto = function(files, cb){
+Treasure.prototype.addPhotos = function(files, cb){
   var dir   = __dirname + '/../static/img'+ this._id,
       exist = fs.existsSync(dir),
       self  = this;
@@ -57,10 +68,10 @@ Treasure.found = function(id, cb){
   Treasure.collection.update({_id:_id}, {$set:{isFound:true}}, cb);
 };
 
-Treasure.create = function(files, fields, cb){
+Treasure.create = function(fields, files, cb){
   var t = new Treasure(fields);
   Treasure.collection.save(t, function(){
-    t.addPhoto(files, cb);
+    t.addPhotos(files, cb);
   });
 };
 

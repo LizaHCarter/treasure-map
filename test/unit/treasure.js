@@ -62,7 +62,7 @@ describe('Treasure', function(){
 
   describe('.query', function(){
     it('should get all treasures', function(done){
-      Treasure.query({},{},function(err, treasure){
+      Treasure.query({},function(err, treasure){
         expect(treasure).to.have.length(3);
         done();
       });
