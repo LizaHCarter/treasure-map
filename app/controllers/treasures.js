@@ -29,6 +29,7 @@ exports.create = function(req, res){
 
 exports.show = function(req, res){
   Treasure.findById(req.params.id, function(err, treasure){
+    console.log(treasure);
     res.render('treasures/show', {treasure:treasure});
   });
 };

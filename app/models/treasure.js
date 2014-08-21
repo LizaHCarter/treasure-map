@@ -13,6 +13,7 @@ function Treasure(o){
   this.hints      = o.hints;
   this.tags       = o.tags[0].split(',').map(function(t){return t.trim();});
   this.isFound    = false;
+  this.isLinkable = (o.order[0] === '1') ? true : false;
 }
 
 Object.defineProperty(Treasure, 'collection', {
@@ -37,7 +38,7 @@ Treasure.count = function(cb){
 Treasure.findById = function(id, cb){
   id = Mongo.ObjectID(id);
   Treasure.collection.findOne({_id:id}, function(err, obj){
-    cb(obj);
+    cb(err, obj);
   });
 };
 

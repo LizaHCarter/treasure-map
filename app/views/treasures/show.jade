@@ -1,0 +1,42 @@
+extends ../shared/template
+block content
+  h2 View Treasure
+  .panel.panel-default
+    .panel-body
+      .row#show
+        .col-xs-12
+          #map
+      .row
+        .col-xs-12
+          #data(data-name='#{treasure.loc.name}', data-lat='#{treasure.loc.lat}', data-lng='#{treasure.loc.lng}')
+            h3= treasure.name
+            table.table
+              thead
+                tr
+                  th Location
+                  th Latitude
+                  th Longitude
+                  th Difficulty
+                  th Tags
+                  th Hints
+              tbody
+                tr
+                  td= treasure.loc.name
+                  td= treasure.loc.lat
+                  td= treasure.loc.lng
+                  td= treasure.difficulty
+                  td= treasure.tags
+                  td
+                    ol
+                      each hint in treasure.hints
+                        li= hint
+
+      .row
+        .col-xs-12
+          #photos
+            each photo in treasure.photos
+              .photo.thumbnail(style='background-image:url(#{photo});')
+
+
+block scripts
+  script(src='/js/user/show.js')

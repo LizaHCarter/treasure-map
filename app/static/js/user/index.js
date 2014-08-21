@@ -28,19 +28,15 @@
     _.remove(waypts, function(point){
       return point.order === start.order;
     });
-    // remove the end location
     _.remove(waypts, function(point){
       return point.order === end.order;
     });
-    // sort first to last based on order
     waypts.sort(function(a, b){
       return a.order - b.order;
     });
-    // convert points array to waypoints array
     waypts = waypts.map(function(p){
       return {location:p.name, stopover:true};
     });
-    // create request object
     var request = {
       origin: start.name,
       destination: end.name,
@@ -60,13 +56,11 @@
     var locations = $('table tbody tr').toArray().map(function(o){
       var loc = {};
       loc.name = $(o).attr('data-name');
-      loc.lat = parseFloat($(o).attr('data-lat'));
-      loc.lng = parseFloat($(o).attr('data-lng'));
+      loc.lat = parseFloat($(o).attr('data-loc[lat]'));
+      loc.lng = parseFloat($(o).attr('data-loc[lng]'));
       loc.order = parseInt($(o).attr('data-order'));
-      // console.log(loc);
       return loc;
     });
-    // console.log(locations);
     return locations;
   }
 

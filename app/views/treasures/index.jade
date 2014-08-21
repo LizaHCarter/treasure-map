@@ -10,20 +10,20 @@ block content
           table.table.table-hover
             thead
               tr
+                th Order
                 th Name
                 th Location
                 th Difficulty
                 th Tags
-                th Order
                 th Found
             tbody
               each treasure in treasures
                 tr(data-name='#{treasure.loc.name}', data-lat='#{treasure.loc.lat}', data-lng='#{treasure.loc.lng}', data-order='#{treasure.order}')
-                  td= treasure.name
+                  td= treasure.order
+                  td: a(href='/treasures/#{treasure._id}')= treasure.name
                   td= treasure.loc.name
                   td= treasure.difficulty
                   td= treasure.tags
-                  td= treasure.order
                   if treasure.isFound === false
                     td: img(src='https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xaf1/t1.0-1/c13.4.48.48/p56x56/198106_189018051141204_1548243_n.jpg') 
                   else
